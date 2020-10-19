@@ -6,3 +6,5 @@ def problem1():
         if i%3==0 or i%5==0:
             sum = sum + i
     print(sum)
+
+problem1()
