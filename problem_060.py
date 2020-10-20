@@ -111,7 +111,7 @@ def problem60():
 
             if prcnt%10 == 0 and tmppercnt != prcnt:
                 tmppercnt = prcnt
-                print prcnt, "% fullfort"
+                #print prcnt, "% fullfort"
 
             #primes.sort()
             if isinstance(primes, int):
@@ -129,18 +129,18 @@ def problem60():
 
     primeConcatenates = [3, 7, 11, 13, 17]
     #print primeConcatenates
-    print "run 1/4:"
+    print ("run 1/4:")
     primeConcatenates = addConcatenates(primes, primeConcatenates, 6000)
-    print "grupper med to primes: \n", primeConcatenates
-    print "run 2/4:"
+    print ("grupper med to primes: \n" )+ str(primeConcatenates)
+    print ("run 2/4:")
     primeConcatenates = addConcatenates(primes, primeConcatenates, 7000)
-    print "grupper med tre primes: \n", primeConcatenates
-    print "run 3/4:"
+    print ("grupper med tre primes: \n") + str(primeConcatenates)
+    print ("run 3/4:")
     primeConcatenates = addConcatenates(primes, primeConcatenates, 8000)
-    print "grupper med fire primes: \n", primeConcatenates
-    print "run 4/4:"
+    print ("grupper med fire primes: \n")+ str(primeConcatenates)
+    print ("run 4/4:")
     primeConcatenates = addConcatenates(primes, primeConcatenates, 10000)
-    print "grupper med fem primes: \n", primeConcatenates
+    print ("grupper med fem primes: \n" )+ str(primeConcatenates)
 
     best_sum = 10000000
     best_primes = []
@@ -150,8 +150,8 @@ def problem60():
             best_sum = current_sum
             best_primes = primes
 
-    print "beste kombinasjonen av primes:"
-    print best_primes
-    print "som gir summen:", best_sum
+    print ("beste kombinasjonen av primes:")
+    print (best_primes)
+    print ("som gir summen:") + str( best_sum)
 
 problem60()
