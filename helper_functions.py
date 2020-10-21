@@ -12,6 +12,15 @@ import time
 import string
 import numpy as np
 
+def IsPrime(number):
+
+    newPrime = True
+    for i in range(2, int(number**0.5)+1):
+        if number % i == 0:
+            return False
+    return True
+
+
 def IsPrime(primes, number):
 
     newPrime = True
