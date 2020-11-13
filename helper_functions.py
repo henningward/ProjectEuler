@@ -12,14 +12,6 @@ import time
 import string
 import numpy as np
     
-def IsPrime(number):
-
-    newPrime = True
-    for i in range(2, int(number**0.5)+1):
-        if number % i == 0:
-            return False
-    return True
-
 def IsPrime(n):
   if n == 2 or n == 3: return True
   if n < 2 or n%2 == 0: return False
@@ -58,7 +50,7 @@ def binarySearch(arr, l, r, x):
     # Check base case
     if r >= l:
 
-        mid = l + (r - l) / 2
+        mid = int(l + (r - l) / 2)
 
         # If element is present at the middle itself
         if arr[mid] == x:
@@ -107,3 +99,29 @@ start_time = time.time()
 #problemX()
 print("--- %s seconds ---" % (time.time() - start_time))
 
+
+
+""" template
+
+import time
+
+# https://projecteuler.net/problem=45
+# Triangular, pentagonal, and hexagonal
+
+def problem45():
+
+    return 0
+
+
+
+start_time = time.time()
+result = problem45()
+
+print("--- %s seconds ---" % (time.time() - start_time))
+print("----------------------------------")
+print("result: " + str(result))
+print("----------------------------------")
+
+
+
+"""
