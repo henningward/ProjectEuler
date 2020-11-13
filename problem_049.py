@@ -23,87 +23,81 @@ def IsPrime(n):
 
 def IsPermutation(a, b): return sorted(str(a)) == sorted(str(b))
 
-def problem49():
-    combinations = list(itertools.permutations(split_int_to_list(1234567890), 4))
-    combinations = [listToInt(combination) for combination in combinations]
+def ConfirmValidResult(llist):
+    for i in range(len(llist)):
+        for j in range(i+1, len(llist)):
+            d = abs(llist[i] - llist[j])
+            for k in range(j+1, len(llist)):
+                if abs(llist[j] - llist[k]) == d:
+                    return [llist[i],llist[j],llist[k] ]
+    return False
+        
 
-    for i in range(len(combinations) -1, -1, -1):
-        if not IsPrime(combinations[i]):
-            combinations.pop(i)
+def problem49():
+    combinations = list(itertools.product(split_int_to_list(1234567890), repeat = 4))
+    
+    
+    combinations = [listToInt(combination) for combination in combinations]
+    cprimes = []
+
+    for combination in combinations:
+        if IsPrime((combination)):
+            cprimes.append(combination)
+    combinations = cprimes
+
+
         #elif len(str(combinations[i])) == 3:
         #    combinations.pop(i)
-
+    #print(combinations)
+    for c in combinations:
+        if not IsPrime(c):
+            print(":O")
     #combinations = sorted(combinations)
     #combinationsSorted = [listToInt(sorted(str(c))) for c in combinations]
     #print(combinations)
-    
+
     inc = []
     itr = 0
+
 
     for i in range(len(combinations)):
         permutations = []
         c1 = combinations[i]
-        permutations.append(c1)
         inc = []
-        itr = 0
-        for j in range(i, len(combinations)):
-            c2 = combinations[j]
-            if IsPermutation(c1, c2):
-                permutations.append(c2)
-                for permutation in permutations:
-                    d = abs(permutation - c2)
-                    if not d == 0:
-                        if d in inc:
-                            itr = itr + 1
-                            if itr == 1:
-                                return d
-                        else:
-                            inc.append(d)
-  
-            
 
+        if len(str(c1)) == 4:
+            permutations.append(c1)
+            for j in range(i+1, len(combinations)):
+                c2 = combinations[j]
+                if IsPermutation(c1, c2) and len(str(c2)) == 4:
+                    permutations.append(c2)
+                    for permutation in permutations:
+                        d = abs(permutation - c2)
+                        #if d == 3330:
+                        #    print(c2)
+                        if not d == 0 and len(str(d)) == 4:
+                            if d in inc:
+                               
+                                if (ConfirmValidResult(permutations)):
+                                    result =  (ConfirmValidResult(permutations))
+                                    result = sorted(result)
+                                    st = ""
+                                    for r in result:
+                                        st = st + str(r)
+                                    if not int(st) == 148748178147:
+                                        return int(st)
+                                   
 
+                            else:
+                                inc.append(d)
+                    
+                        
+                    
+
+        
+        
 
     return ":("
-
-"""
-    combinations = [x for _,x in sorted(zip(combinations,combinationsSorted))]
-    combinationsSorted = sorted(combinationsSorted)
-
-    #print(combinations)
-    #print("----")
-    #print(combinationsSorted)
-    success = False
-    index = 0
-
-    while not success:
-        
-        currentPermutation = combinationsSorted[index]
-        inc = []
-        itr = 0
-        for i in range(index, len(combinations)):
-            if combinationsSorted[i] is not currentPermutation:
-                if index < len(combinations) - 2:
-                    index = i + 1
-                else:
-                    return 0
-                #print(index)
-                break
-            combination = combinations[i]
-
-            if combination in inc:
-                itr = itr + 1
-            inc.append(combination)
-            print(inc)
-
-            if itr == 3:
-                return combination
-            
-"""
-
-
-
-
 
 
 start_time = time.time()
