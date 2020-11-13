@@ -12,6 +12,7 @@ import time
 import string
 import numpy as np
     
+#primes = [prime for prime in range(upr) if IsPrime(prime)] 
 def IsPrime(n):
   if n == 2 or n == 3: return True
   if n < 2 or n%2 == 0: return False
@@ -44,6 +45,8 @@ def split_int_to_list(word):
     for i in range(0, len(listofstrings)):
         listofints.append(int(listofstrings[i]))
     return listofints
+
+def listToInt(n): return int(''.join(map(str,n)))
 
 
 def binarySearch(arr, l, r, x):
@@ -110,7 +113,7 @@ import time
 
 def problem45():
 
-    return 0
+    return (":(")
 
 
 
