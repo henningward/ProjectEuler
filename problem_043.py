@@ -4,19 +4,6 @@ import itertools
 # https://projecteuler.net/problem=43
 # Sub-string divisibility
 
-def IsPrime(n):
-  if n == 2 or n == 3: return True
-  if n < 2 or n%2 == 0: return False
-  if n < 9: return True
-  if n%3 == 0: return False
-  r = int(n**0.5)
-  f = 5
-  while f <= r:
-    if n%f == 0: return False
-    if n%(f+2) == 0: return False
-    f +=6
-  return True
-
 def split_int_to_list(word):
     listofints = []
     listofstrings = [char for char in str(word)]
@@ -28,7 +15,7 @@ def listToInt(n):
     return int(''.join(map(str,n)))
 
 
-def NewPermutations(notToBeIncluded = "", length):
+def NewPermutations(notToBeIncluded, length):
     substr = ""
     for i in range(10):
         if str(i) not in str(notToBeIncluded):
@@ -41,41 +28,77 @@ def NewPermutations(notToBeIncluded = "", length):
 
     return triplePermutations
 
-def NextPermutation(sub, n):
-
-    result = 0
-    permutations = NewPermutations(sub)
-    for permutation in permutations:
-        if (n == 2):
-            print(n)
-        if permutation%n == 0:
-            if n == 9:
-                return True
-            result = result + NextPermutation(permutation, n + 1)
-    return False
 def problem43():
 
-    #divisors = [2, 3, 5, 7, 11, 13, 17]
+    d6d7d8 = []
+    comb = NewPermutations(5, 2)
+    for n in comb:
+        if len(str(n)) is not 2:
+            n = str(0) + str(n)
+        if int(str(5) + str(n)) % 11 == 0:
+            #print(str(5) + str(n))
+            d6d7d8.append((str(5) + str(n)))
+
+    d7d8 = [(n[1:]) for n in d6d7d8]
+
+    d6d7d8d9 = []
+
+    for n in d7d8:
+        d9 = NewPermutations(int(str(5) + str(n)), 1)
+
+        for d in d9:
+            if int(str(n) + str(d)) % 13 == 0:
+                d6d7d8d9.append(str(5) + str(n) + str(d))
+
+    d6d7d8d9d10 = []
+
+    for n in d6d7d8d9:
+        nsliced = n[2:]
+        d10 = NewPermutations(int(str(5) + str(nsliced)), 1)
+
+        for d in d10:
+            if int(str(nsliced) + str(d)) % 17 == 0:
+                d6d7d8d9d10.append(str(n) + str(d))
     
-    #d6 = 5
+    d5d6d7d8d9d10 = []
 
-    for i in range(10000):
-        if i%11 == 0:
-            print(i)
+    for n in d6d7d8d9d10:
+        d6d7 = n[:2]
+        d5 = NewPermutations(int(d6d7), 1)
 
-    #n = 1234567890
-    #temp = list(itertools.permutations(split_int_to_list(n)))
-    #Permutations = []
-    #for combination in temp:
-    #    Permutations.append(listToInt(combination))
-    #print(NextPermutation("", 2))
-    
-  
+        for d in d5:
+            if int(str(d) + str(d6d7)) % 7 == 0:
+                d5d6d7d8d9d10.append(str(d) + str(n))
 
+    d3d4d5d6d7d8d9d10 = []
 
+    for n in d5d6d7d8d9d10:
 
-    #print(triplePermutations)
+        d3d4 = NewPermutations(int(n), 2)
+        d5 = str(n)[0]
+        for d in d3d4:
+            if len(str(d)) is not 2:
+                d = str(0) + str(d)
+            d4 = str(d)[1]
+            if int(str(d) + str(d5)) % 3 == 0:                    
+                if int(d4) % 2 == 0:
+                    d3d4d5d6d7d8d9d10.append(str(d) + str(n))
+
+    d1d2d3d4d5d6d7d8d9d10 = []
+
+    for n in d3d4d5d6d7d8d9d10:
+        if str(0) in n:
+            d1d2 = NewPermutations(int(n + str(0)), 2)
+        else:
+            d1d2 = NewPermutations(int(n), 2)
+        for d in d1d2:
+            d1d2d3d4d5d6d7d8d9d10.append(int(str(d) + str(n)))
+    return sum(d1d2d3d4d5d6d7d8d9d10)
+    print("result: " + str(sum(d1d2d3d4d5d6d7d8d9d10)))
 
 start_time = time.time()
-problem43()
+result = problem43()
+
 print("--- %s seconds ---" % (time.time() - start_time))
+
+print("result: " + str(result))
