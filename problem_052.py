@@ -12,6 +12,7 @@ def IsPermutations(llist):
     return all_equal(llist)
 
 def problem52():
+
     upr = 10000000
     for n in range(1, upr):
         success = True

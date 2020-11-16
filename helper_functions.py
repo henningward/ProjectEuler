@@ -111,14 +111,14 @@ import time
 # https://projecteuler.net/problem=45
 # Triangular, pentagonal, and hexagonal
 
-def problem45():
+def Main():
 
     return (":(")
 
 
 
 start_time = time.time()
-result = problem45()
+result = Main()
 
 print("--- %s seconds ---" % (time.time() - start_time))
 print("----------------------------------")
