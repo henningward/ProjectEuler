@@ -18,6 +18,6 @@ start_time = time.time()
 result = Main()
 
 print("--- %s seconds ---" % (time.time() - start_time))
-print("----------------------------------")
+print("------------------------------------")
 print("result: " + str(result))
-print("----------------------------------")
+print("------------------------------------")
